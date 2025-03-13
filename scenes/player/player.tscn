@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwq1qa2of8uhd"]
+
+[ext_resource type="Script" uid="uid://bombx4slu53oo" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="Texture2D" uid="uid://cx5kl3ridim33" path="res://assets/16ShipCollection_trans.png" id="2_dovo2"]
+[ext_resource type="PackedScene" uid="uid://b6oie3fqrmrph" path="res://scenes/bullet/bullet.tscn" id="2_gmlin"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 5
+motion_mode = 1
+script = ExtResource("1_dovo2")
+bullet = ExtResource("2_gmlin")
+
+[node name="Ships" type="Node2D" parent="."]
+
+[node name="Blue" type="Sprite2D" parent="Ships"]
+rotation = -1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_dovo2")
+region_enabled = true
+region_rect = Rect2(109, 43, 13, 14)
+
+[node name="Yellow" type="Sprite2D" parent="Ships"]
+visible = false
+rotation = -1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_dovo2")
+region_enabled = true
+region_rect = Rect2(439, 43, 13, 14)
+
+[node name="Pink" type="Sprite2D" parent="Ships"]
+visible = false
+rotation = -1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_dovo2")
+region_enabled = true
+region_rect = Rect2(549, 43, 13, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -0.786315
+shape = SubResource("RectangleShape2D_dovo2")

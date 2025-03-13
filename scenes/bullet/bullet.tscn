@@ -1,0 +1,101 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6oie3fqrmrph"]
+
+[ext_resource type="Texture2D" uid="uid://cx5kl3ridim33" path="res://assets/16ShipCollection_trans.png" id="1_7c8un"]
+[ext_resource type="Script" uid="uid://cmaos8ka73tyb" path="res://scenes/bullet/bullet.gd" id="1_83itf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_83itf"]
+size = Vector2(4.27975, 4.24105)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83itf"]
+atlas = ExtResource("1_7c8un")
+region = Rect2(281, 468, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6pnf"]
+atlas = ExtResource("1_7c8un")
+region = Rect2(261, 468, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vdx3"]
+atlas = ExtResource("1_7c8un")
+region = Rect2(241, 468, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8g26r"]
+atlas = ExtResource("1_7c8un")
+region = Rect2(221, 468, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4loxr"]
+atlas = ExtResource("1_7c8un")
+region = Rect2(201, 468, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_papww"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83itf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6pnf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vdx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8g26r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4loxr")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_83itf")
+
+[node name="Color" type="Node2D" parent="."]
+
+[node name="Blue" type="Sprite2D" parent="Color"]
+texture = ExtResource("1_7c8un")
+region_enabled = true
+region_rect = Rect2(521, 493, 5, 5)
+
+[node name="Yellow" type="Sprite2D" parent="Color"]
+visible = false
+texture = ExtResource("1_7c8un")
+region_enabled = true
+region_rect = Rect2(521, 533, 5, 5)
+
+[node name="Red" type="Sprite2D" parent="Color"]
+visible = false
+texture = ExtResource("1_7c8un")
+region_enabled = true
+region_rect = Rect2(521, 473, 5, 5)
+
+[node name="Pink" type="Sprite2D" parent="Color"]
+visible = false
+texture = ExtResource("1_7c8un")
+region_enabled = true
+region_rect = Rect2(521, 513, 5, 5)
+
+[node name="Green" type="Sprite2D" parent="Color"]
+visible = false
+texture = ExtResource("1_7c8un")
+region_enabled = true
+region_rect = Rect2(521, 553, 5, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.0140501, -0.0133013)
+rotation = -0.812763
+shape = SubResource("RectangleShape2D_83itf")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 7)
+collide_with_areas = true
+
+[node name="Explosion" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_papww")
+frame = 4
+frame_progress = 0.0404509
+
+[connection signal="animation_finished" from="Explosion" to="." method="_on_explosion_animation_finished"]
