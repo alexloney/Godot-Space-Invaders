@@ -46,7 +46,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
-"speed": 10.0
+"speed": 7.0
 }]
 
 [node name="Bullet" type="Area2D"]
