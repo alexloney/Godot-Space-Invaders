@@ -141,6 +141,10 @@ func _physics_process(delta: float) -> void:
 			elif bullet_type == Global.BulletType.PLAYER and collider.is_in_group("enemy"):
 				collider.destroy_ship()
 				destroy_bullet()
+			
+			elif collider.is_in_group("bunker"): 
+				collider.destroy_bunker()
+				destroy_bullet()
 	
 	# Move the bullet either up or down, depending on who fired the bullet
 	if bullet_type == Global.BulletType.PLAYER:

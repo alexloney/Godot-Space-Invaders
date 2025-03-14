@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://1g6fkgk4a7s3"]
+[gd_scene load_steps=14 format=3 uid="uid://1g6fkgk4a7s3"]
 
 [ext_resource type="Script" uid="uid://b4fgu7iprt1p2" path="res://scenes/main.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bwq1qa2of8uhd" path="res://scenes/player/player.tscn" id="1_o5qli"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://x6fag8j2hrd4" path="res://scenes/win_screen.gd" id="7_85g3d"]
 [ext_resource type="PackedScene" uid="uid://bqy1pa3kaydux" path="res://scenes/enemy-manager/enemy_manager.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://bkqweflypj03f" path="res://scenes/enemy/enemy.tscn" id="8_tipki"]
+[ext_resource type="PackedScene" uid="uid://bfeptm6nk5ymb" path="res://scenes/bunker/bunker.tscn" id="10_choun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
 size = Vector2(10, 811)
@@ -268,6 +269,18 @@ shape = SubResource("RectangleShape2D_85g3d")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameOverArea"]
 position = Vector2(225, 725.5)
 shape = SubResource("RectangleShape2D_choun")
+
+[node name="Bunker" parent="." instance=ExtResource("10_choun")]
+position = Vector2(39, 716)
+scale = Vector2(2.86589, 2.86589)
+
+[node name="Bunker2" parent="." instance=ExtResource("10_choun")]
+position = Vector2(193, 716)
+scale = Vector2(2.86589, 2.86589)
+
+[node name="Bunker3" parent="." instance=ExtResource("10_choun")]
+position = Vector2(348, 716)
+scale = Vector2(2.86589, 2.86589)
 
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
 [connection signal="player_game_over" from="Player" to="." method="_on_player_player_game_over"]

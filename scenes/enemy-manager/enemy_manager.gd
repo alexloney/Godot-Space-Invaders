@@ -4,15 +4,16 @@ signal enemy_landed()
 
 @export var enemy: PackedScene
 var x_space: int = 5
-var y_space: int = 20
+var y_space: int = 5
 var rows: int = 2
 var ship_1_rows: int = 2
 var ship_2_rows: int = 2
 var ship_3_rows: int = 4
-var columns: int = 11
+var columns: int = 10
 var ships_min_x: int = 0
 var ships_max_x: int = 0
-var speed: int = 30
+var speed: float = 30
+var speed_increment: float = 0.5
 var movement_direction: Global.Direction = Global.Direction.RIGHT
 var next_y: int = 0
 var vertical_movement_distance: int = 24 + 15
@@ -120,14 +121,13 @@ func _physics_process(delta: float) -> void:
 				movement_direction = Global.Direction.LEFT
 
 func increase_speed() -> void:
-	speed += 1
+	speed += speed_increment
 
 func all_ships_destroyed() -> bool:
 	for i in range(len(ships)):
 		for j in range(len(ships[i])):
 			if ships[i][j] and ships[i][j].ship_alive:
 				return false
-	
 	return true
 
 func _on_enemy_enemy_ship_destroyed() -> void:
