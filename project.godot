@@ -31,6 +31,7 @@ player_bullet=""
 enemy_bullet=""
 player=""
 walls=""
+ground=""
 
 [input]
 

@@ -3,6 +3,7 @@ extends Node
 @export var bullet : PackedScene
 
 var lives: int = 3
+var score: int = 0
 
 func game_over() -> void:
 	$GameOverScreen.game_over()
@@ -47,4 +48,12 @@ func _on_player_player_died() -> void:
 		$Player.set_ship_color(Global.Colors.NONE)
 
 func _on_player_player_game_over() -> void:
+	game_over()
+
+func add_score(points: int) -> void:
+	score += points
+	Global.set_score(score)
+	$UI/ScoreLabel.text = "Score: " + str(score)
+
+func _on_enemy_manager_enemy_landed() -> void:
 	game_over()

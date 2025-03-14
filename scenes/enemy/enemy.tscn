@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkqweflypj03f"]
+[gd_scene load_steps=12 format=3 uid="uid://bkqweflypj03f"]
 
 [ext_resource type="Texture2D" uid="uid://cx5kl3ridim33" path="res://assets/16ShipCollection_trans.png" id="1_4a83h"]
 [ext_resource type="Script" uid="uid://b2et55ecd3qnb" path="res://scenes/enemy/enemy.gd" id="1_a3pup"]
 [ext_resource type="Script" uid="uid://b4e4k16tjukrh" path="res://scenes/enemy/invader_1.gd" id="2_40wdo"]
+[ext_resource type="PackedScene" uid="uid://b6oie3fqrmrph" path="res://scenes/bullet/bullet.tscn" id="3_nbhyu"]
 [ext_resource type="Script" uid="uid://da17xpxouhsal" path="res://scenes/enemy/invader_2.gd" id="4_tjssy"]
 [ext_resource type="Script" uid="uid://ckqqfh8cvu8p3" path="res://scenes/enemy/invader_3.gd" id="5_gl05p"]
 [ext_resource type="Script" uid="uid://dgrqvpv2hw2b3" path="res://scenes/enemy/mothership.gd" id="6_cwlon"]
@@ -26,6 +27,7 @@ script = ExtResource("1_a3pup")
 visible = false
 scale = Vector2(2, 2)
 script = ExtResource("2_40wdo")
+bullet = ExtResource("3_nbhyu")
 
 [node name="Sprite2D" type="Sprite2D" parent="Invader1"]
 rotation = -1.5708
@@ -40,6 +42,7 @@ shape = SubResource("RectangleShape2D_40wdo")
 visible = false
 scale = Vector2(2, 2)
 script = ExtResource("4_tjssy")
+bullet = ExtResource("3_nbhyu")
 
 [node name="Sprite2D" type="Sprite2D" parent="Invader2"]
 rotation = -1.5708
@@ -54,6 +57,7 @@ shape = SubResource("RectangleShape2D_tjssy")
 visible = false
 scale = Vector2(2, 2)
 script = ExtResource("5_gl05p")
+bullet = ExtResource("3_nbhyu")
 
 [node name="Sprite2D" type="Sprite2D" parent="Invader3"]
 rotation = -1.5708
@@ -67,6 +71,7 @@ shape = SubResource("RectangleShape2D_gl05p")
 [node name="Mothership" type="Area2D" parent="."]
 visible = false
 script = ExtResource("6_cwlon")
+bullet = ExtResource("3_nbhyu")
 
 [node name="Sprite2D" type="Sprite2D" parent="Mothership"]
 rotation = -1.5708
@@ -85,3 +90,11 @@ collide_with_areas = true
 [node name="RayCast2DRight" type="RayCast2D" parent="."]
 target_position = Vector2(20, 0)
 collide_with_areas = true
+
+[node name="ShotTimer" type="Timer" parent="."]
+
+[node name="RayCast2DDown" type="RayCast2D" parent="."]
+target_position = Vector2(0, 18)
+collide_with_areas = true
+
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

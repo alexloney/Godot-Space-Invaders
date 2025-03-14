@@ -123,18 +123,24 @@ func _physics_process(delta: float) -> void:
 		# Obtain the object that has been collided with
 		var collider = ray_cast_2d.get_collider()
 		
-		# If it has collided with a bullet (either player -> enemy or enemy -> player)
-		# call destroy on both bullets to destroy them
-		if ((bullet_type == Global.BulletType.PLAYER and collider.is_in_group("enemy_bullet"))
-			or (bullet_type == Global.BulletType.ENEMY and collider.is_in_group("player_bullet"))):
-			collider.destroy_bullet()
-			destroy_bullet()
-		
-		# If it has collided with the player, inform the player that the collision has
-		# occured and destroy the bullet. Let the player handle what happens next for it.
-		elif bullet_type == Global.BulletType.ENEMY and collider.is_in_group("player"):
-			collider.destroy_player()
-			destroy_bullet()
+		if collider:
+			# If it has collided with a bullet (either player -> enemy or enemy -> player)
+			# call destroy on both bullets to destroy them
+			if ((bullet_type == Global.BulletType.PLAYER and collider.is_in_group("enemy_bullet"))
+				or (bullet_type == Global.BulletType.ENEMY and collider.is_in_group("player_bullet"))):
+				collider.destroy_bullet()
+				destroy_bullet()
+			
+			# If it has collided with the player, inform the player that the collision has
+			# occured and destroy the bullet. Let the player handle what happens next for it.
+			elif bullet_type == Global.BulletType.ENEMY and collider.is_in_group("player"):
+				collider.destroy_player()
+				destroy_bullet()
+			
+			# If it has collided with an enemy ship, destroy the enemy chip
+			elif bullet_type == Global.BulletType.PLAYER and collider.is_in_group("enemy"):
+				collider.destroy_ship()
+				destroy_bullet()
 	
 	# Move the bullet either up or down, depending on who fired the bullet
 	if bullet_type == Global.BulletType.PLAYER:
