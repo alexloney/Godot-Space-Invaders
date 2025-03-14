@@ -23,6 +23,8 @@ size = Vector2(42, 12)
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_a3pup")
 
+[node name="ShotTimer" type="Timer" parent="."]
+
 [node name="Invader1" type="Area2D" parent="."]
 visible = false
 scale = Vector2(2, 2)
@@ -90,8 +92,6 @@ collide_with_areas = true
 [node name="RayCast2DRight" type="RayCast2D" parent="."]
 target_position = Vector2(20, 0)
 collide_with_areas = true
-
-[node name="ShotTimer" type="Timer" parent="."]
 
 [node name="RayCast2DDown" type="RayCast2D" parent="."]
 target_position = Vector2(0, 18)

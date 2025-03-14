@@ -8,3 +8,5 @@ script = ExtResource("1_ownsf")
 enemy = ExtResource("1_3n05w")
 
 [node name="Enemy" parent="." instance=ExtResource("1_3n05w")]
+
+[connection signal="enemy_ship_destroyed" from="Enemy" to="." method="_on_enemy_enemy_ship_destroyed"]

@@ -55,5 +55,12 @@ func add_score(points: int) -> void:
 	Global.set_score(score)
 	$UI/ScoreLabel.text = "Score: " + str(score)
 
+func enemy_destroyed(points: int) -> void:
+	add_score(points)
+	$EnemyManager.increase_speed()
+	
+	if $EnemyManager.all_ships_destroyed():
+		$WinScreen.you_win()
+
 func _on_enemy_manager_enemy_landed() -> void:
 	game_over()

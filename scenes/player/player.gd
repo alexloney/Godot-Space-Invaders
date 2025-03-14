@@ -35,7 +35,7 @@ func display_ship() -> void:
 func fire_bullet() -> void:
 	var new_bullet : Node2D = bullet.instantiate()
 	new_bullet.position = Vector2(position.x, position.y - 12)
-	get_tree().root.add_child(new_bullet)
+	get_tree().root.get_node("Main").add_child(new_bullet)
 	new_bullet.set_bullet_type(Global.BulletType.PLAYER)
 	new_bullet.set_bullet_color(ship_color)
 

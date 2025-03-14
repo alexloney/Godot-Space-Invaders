@@ -1,5 +1,6 @@
 extends Node2D
 
+signal enemy_ship_destroyed()
 # signal enemy_destroyed(score: int)
 
 @onready var ray_cast_2d_left: RayCast2D = $RayCast2DLeft
@@ -9,15 +10,11 @@ extends Node2D
 var ship_type: Global.EnemyShips = Global.EnemyShips.NONE
 var ship_ref: Area2D
 var movement: Global.Direction = Global.Direction.RIGHT
-var speed: int = 100
 
 var ship_width: int = 28
 var mothership_width: int = 42
 
-var mothership_score: int = 100
-var invader_1_score: int = 30
-var invader_2_score: int = 20
-var invader_3_score: int = 10
+var ship_alive: bool = true
 
 func hide_ships() -> void:
 	$Invader1.hide()
@@ -28,6 +25,7 @@ func hide_ships() -> void:
 func spawn_enemy(ship: Global.EnemyShips) -> void:
 	hide_ships()
 	ship_type = ship
+	ship_alive = true
 	
 	match ship:
 		Global.EnemyShips.INVADER_1:
@@ -45,11 +43,6 @@ func spawn_enemy(ship: Global.EnemyShips) -> void:
 	
 	$ShotTimer.wait_time = randf_range(0.5, 1.5)
 	$ShotTimer.start()
-
-func set_bounds(x: int, y: int, min_x: int, max_x: int) -> void:
-	if ship_ref:
-		ship_ref.position = Vector2(x, y)
-		ship_ref.set_bounds_x(min_x, max_x)
 
 func get_width() -> int:
 	return ship_ref.get_width()
@@ -77,22 +70,26 @@ func add_group(group: String) -> void:
 	$Mothership.add_to_group(group)
 
 func destroy_ship() -> void:
+	ship_alive = false
 	
 	# Below I'm using get_tree() and calling a method on the main node. I'd have
 	# preferred to use emit_signal(), but the signal wasn't emitting?
 	match ship_type:
 		Global.EnemyShips.INVADER_1:
 			# emit_signal("enemy_destroyed", Global.EnemyShipScores.INVADER_1)
-			get_tree().root.get_node("Main").add_score(Global.EnemyShipScores.INVADER_1)
+			get_tree().root.get_node("Main").enemy_destroyed(Global.EnemyShipScores.INVADER_1)
 		Global.EnemyShips.INVADER_2:
 			# emit_signal("enemy_destroyed", Global.EnemyShipScores.INVADER_2)
-			get_tree().root.get_node("Main").add_score(Global.EnemyShipScores.INVADER_2)
+			get_tree().root.get_node("Main").enemy_destroyed(Global.EnemyShipScores.INVADER_2)
 		Global.EnemyShips.INVADER_3:
 			# emit_signal("enemy_destroyed", Global.EnemyShipScores.INVADER_3)
-			get_tree().root.get_node("Main").add_score(Global.EnemyShipScores.INVADER_3)
+			get_tree().root.get_node("Main").enemy_destroyed(Global.EnemyShipScores.INVADER_3)
 		Global.EnemyShips.MOTHERSHIP:
 			# emit_signal("enemy_destroyed", Global.EnemyShipScores.MOTHERSHIP)
-			get_tree().root.get_node("Main").add_score(Global.EnemyShipScores.MOTHERSHIP)
+			get_tree().root.get_node("Main").enemy_destroyed(Global.EnemyShipScores.MOTHERSHIP)
+	
+	# This signal never seems to be emited?
+	emit_signal("enemy_ship_destroyed")
 	
 	# TODO: Animate free here
 	queue_free()

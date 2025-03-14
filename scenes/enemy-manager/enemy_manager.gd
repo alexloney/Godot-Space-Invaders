@@ -12,7 +12,7 @@ var ship_3_rows: int = 4
 var columns: int = 11
 var ships_min_x: int = 0
 var ships_max_x: int = 0
-var speed: int = 60
+var speed: int = 30
 var movement_direction: Global.Direction = Global.Direction.RIGHT
 var next_y: int = 0
 var vertical_movement_distance: int = 24 + 15
@@ -118,3 +118,18 @@ func _physics_process(delta: float) -> void:
 			position.y += speed * delta
 			if position.y >= next_y:
 				movement_direction = Global.Direction.LEFT
+
+func increase_speed() -> void:
+	speed += 1
+
+func all_ships_destroyed() -> bool:
+	for i in range(len(ships)):
+		for j in range(len(ships[i])):
+			if ships[i][j] and ships[i][j].ship_alive:
+				return false
+	
+	return true
+
+func _on_enemy_enemy_ship_destroyed() -> void:
+	# This is never called
+	print("enemy_ship_destroyed")

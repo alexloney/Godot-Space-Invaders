@@ -14,16 +14,12 @@ func get_width() -> int:
 func get_height() -> int:
 	return ship_height
 
-func set_bounds_x(min_x: int, max_x: int) -> void:
-	bound_min_x = min_x
-	bound_max_x = max_x
-
 func destroy_ship() -> void:
 	get_parent().destroy_ship()
 
 func fire_bullet() -> void:
 	var new_bullet : Node2D = bullet.instantiate()
-	get_tree().root.add_child(new_bullet)
+	get_tree().root.get_node("Main").add_child(new_bullet)
 	new_bullet.position = global_position
 	new_bullet.set_bullet_type(Global.BulletType.ENEMY)
 	new_bullet.set_bullet_color(ship_color)

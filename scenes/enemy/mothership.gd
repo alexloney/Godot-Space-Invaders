@@ -14,10 +14,6 @@ func get_width() -> int:
 func get_height() -> int:
 	return ship_height
 
-func set_bounds_x(min_x: int, max_x: int) -> void:
-	bound_min_x = min_x
-	bound_max_x = max_x
-
 func destroy_ship() -> void:
 	get_parent().destroy_ship()
 
