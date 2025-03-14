@@ -1,19 +1,87 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkqweflypj03f"]
+[gd_scene load_steps=11 format=3 uid="uid://bkqweflypj03f"]
 
 [ext_resource type="Texture2D" uid="uid://cx5kl3ridim33" path="res://assets/16ShipCollection_trans.png" id="1_4a83h"]
+[ext_resource type="Script" uid="uid://b2et55ecd3qnb" path="res://scenes/enemy/enemy.gd" id="1_a3pup"]
+[ext_resource type="Script" uid="uid://b4e4k16tjukrh" path="res://scenes/enemy/invader_1.gd" id="2_40wdo"]
+[ext_resource type="Script" uid="uid://da17xpxouhsal" path="res://scenes/enemy/invader_2.gd" id="4_tjssy"]
+[ext_resource type="Script" uid="uid://ckqqfh8cvu8p3" path="res://scenes/enemy/invader_3.gd" id="5_gl05p"]
+[ext_resource type="Script" uid="uid://dgrqvpv2hw2b3" path="res://scenes/enemy/mothership.gd" id="6_cwlon"]
 
-[node name="Enemy" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40wdo"]
+size = Vector2(14, 12)
 
-[node name="Asset" type="Node2D" parent="."]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tjssy"]
+size = Vector2(12, 14)
 
-[node name="Ship1" type="Sprite2D" parent="Asset"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gl05p"]
+size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwlon"]
+size = Vector2(42, 12)
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_a3pup")
+
+[node name="Invader1" type="Area2D" parent="."]
+visible = false
+scale = Vector2(2, 2)
+script = ExtResource("2_40wdo")
+
+[node name="Sprite2D" type="Sprite2D" parent="Invader1"]
 rotation = -1.5708
 texture = ExtResource("1_4a83h")
 region_enabled = true
 region_rect = Rect2(218, 162, 16, 16)
 
-[node name="Ship2" type="Sprite2D" parent="Asset"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Invader1"]
+shape = SubResource("RectangleShape2D_40wdo")
+
+[node name="Invader2" type="Area2D" parent="."]
+visible = false
+scale = Vector2(2, 2)
+script = ExtResource("4_tjssy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Invader2"]
 rotation = -1.5708
 texture = ExtResource("1_4a83h")
 region_enabled = true
 region_rect = Rect2(198, 222, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Invader2"]
+shape = SubResource("RectangleShape2D_tjssy")
+
+[node name="Invader3" type="Area2D" parent="."]
+visible = false
+scale = Vector2(2, 2)
+script = ExtResource("5_gl05p")
+
+[node name="Sprite2D" type="Sprite2D" parent="Invader3"]
+rotation = -1.5708
+texture = ExtResource("1_4a83h")
+region_enabled = true
+region_rect = Rect2(218, 342, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Invader3"]
+shape = SubResource("RectangleShape2D_gl05p")
+
+[node name="Mothership" type="Area2D" parent="."]
+visible = false
+script = ExtResource("6_cwlon")
+
+[node name="Sprite2D" type="Sprite2D" parent="Mothership"]
+rotation = -1.5708
+scale = Vector2(1, 3)
+texture = ExtResource("1_4a83h")
+region_enabled = true
+region_rect = Rect2(308, 162, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mothership"]
+shape = SubResource("RectangleShape2D_cwlon")
+
+[node name="RayCast2DLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-20, 0)
+collide_with_areas = true
+
+[node name="RayCast2DRight" type="RayCast2D" parent="."]
+target_position = Vector2(20, 0)
+collide_with_areas = true

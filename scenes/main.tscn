@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://1g6fkgk4a7s3"]
+[gd_scene load_steps=11 format=3 uid="uid://1g6fkgk4a7s3"]
 
 [ext_resource type="Script" uid="uid://b4fgu7iprt1p2" path="res://scenes/main.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bwq1qa2of8uhd" path="res://scenes/player/player.tscn" id="1_o5qli"]
@@ -7,6 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://cs0b0msvxlyco" path="res://scenes/player-lives/player_lives.tscn" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://bthqlnm1rnjm" path="res://scenes/game_over_screen.gd" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://bqy1pa3kaydux" path="res://scenes/enemy-manager/enemy_manager.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://bkqweflypj03f" path="res://scenes/enemy/enemy.tscn" id="8_tipki"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
+size = Vector2(10, 811)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85g3d"]
+size = Vector2(10, 811)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0wfyh")
@@ -22,6 +29,28 @@ position = Vector2(220, 756)
 script = ExtResource("3_sugp2")
 
 [node name="PlayerLives" parent="." instance=ExtResource("5_tbgi4")]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -723.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+z_index = 5
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -235.0
+offset_top = 12.0
+offset_bottom = 62.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 36
+text = "Score: 0"
 
 [node name="GameOverScreen" type="Control" parent="."]
 process_mode = 3
@@ -87,29 +116,87 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Play Again"
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ScoreLabel" type="Label" parent="UI"]
-z_index = 5
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -235.0
-offset_top = 12.0
-offset_bottom = 62.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 36
-text = "Score: 0"
-
 [node name="EnemyManager" parent="." instance=ExtResource("7_o6xl0")]
+position = Vector2(0, 91)
+
+[node name="Node2D2" type="Node2D" parent="."]
 visible = false
+
+[node name="Enemy" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(14, 140)
+
+[node name="Enemy2" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(47, 140)
+
+[node name="Enemy3" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(80, 140)
+
+[node name="Enemy4" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(113, 140)
+
+[node name="Enemy5" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(146, 140)
+
+[node name="Enemy6" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(179, 140)
+
+[node name="Enemy7" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(212, 140)
+
+[node name="Enemy8" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(245, 140)
+
+[node name="Enemy9" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(278, 140)
+
+[node name="Enemy10" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(311, 140)
+
+[node name="Enemy11" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(344, 140)
+
+[node name="Enemy12" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(106, 168)
+
+[node name="Enemy13" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(139, 168)
+
+[node name="Enemy14" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(172, 168)
+
+[node name="Enemy15" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(205, 168)
+
+[node name="Enemy16" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(238, 168)
+
+[node name="Enemy17" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(271, 168)
+
+[node name="Enemy18" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(304, 168)
+
+[node name="Enemy19" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(337, 168)
+
+[node name="Enemy20" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(370, 168)
+
+[node name="Enemy21" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(403, 168)
+
+[node name="Enemy22" parent="Node2D2" instance=ExtResource("8_tipki")]
+position = Vector2(436, 168)
+
+[node name="Walls" type="Area2D" parent="." groups=["walls"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-5, 395.5)
+shape = SubResource("RectangleShape2D_tipki")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls"]
+position = Vector2(455, 395.5)
+shape = SubResource("RectangleShape2D_85g3d")
 
 [connection signal="timeout" from="TestTimer" to="." method="_on_test_timer_timeout"]
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]

@@ -1,7 +1,7 @@
 extends Area2D
 
 var bullet_type: Global.BulletType
-var speed: int = 100
+var speed: int = 300
 var bullet_color: Global.Colors
 var bullet_colors: Dictionary[Global.Colors, Sprite2D] = {}
 var ray_cast_length: int = 7

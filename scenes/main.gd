@@ -7,6 +7,9 @@ var lives: int = 3
 func game_over() -> void:
 	$GameOverScreen.game_over()
 
+func _ready() -> void:
+	$EnemyManager.spawn_ships()
+
 func _on_test_timer_timeout() -> void:
 	
 	var new_bullet : Node2D = bullet.instantiate()
