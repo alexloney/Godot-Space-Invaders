@@ -2,10 +2,15 @@ extends Node
 
 @export var bullet : PackedScene
 
+var lives: int = 3
+
+func game_over() -> void:
+	$GameOverScreen.game_over()
+
 func _on_test_timer_timeout() -> void:
 	
 	var new_bullet : Node2D = bullet.instantiate()
-	new_bullet.position = Vector2(100, 10)
+	new_bullet.position = Vector2(100, 600)
 	get_tree().root.add_child(new_bullet)
 	new_bullet.set_bullet_type(Global.BulletType.ENEMY)
 	new_bullet.set_bullet_color(Global.Colors.GREEN)
@@ -17,3 +22,26 @@ func _on_test_timer_timeout() -> void:
 	#get_tree().root.add_child(new_bullet)
 	#new_bullet.set_bullet_type(Global.BulletType.PLAYER)
 	#new_bullet.set_bullet_color(Global.Colors.BLUE)
+
+
+func _on_player_player_died() -> void:
+	# Reduce the number of lives the player has remaining
+	lives -= 1
+	
+	# After the first life, we hide the Blue ship
+	if lives == 2:
+		$PlayerLives.hide_life(Global.Colors.BLUE)
+		$Player.respawn_as(Global.Colors.YELLOW)
+	
+	# After the second life we hide the Yellow ship
+	elif lives == 1:
+		$PlayerLives.hide_life(Global.Colors.YELLOW)
+		$Player.respawn_as(Global.Colors.PINK)
+	
+	# After the third life we hide the Pink ship and trigger game-over
+	else:
+		$PlayerLives.hide_life(Global.Colors.PINK)
+		$Player.set_ship_color(Global.Colors.NONE)
+
+func _on_player_player_game_over() -> void:
+	game_over()

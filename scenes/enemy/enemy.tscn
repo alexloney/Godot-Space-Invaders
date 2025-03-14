@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkqweflypj03f"]
+
+[ext_resource type="Texture2D" uid="uid://cx5kl3ridim33" path="res://assets/16ShipCollection_trans.png" id="1_4a83h"]
+
+[node name="Enemy" type="Area2D"]
+
+[node name="Asset" type="Node2D" parent="."]
+
+[node name="Ship1" type="Sprite2D" parent="Asset"]
+rotation = -1.5708
+texture = ExtResource("1_4a83h")
+region_enabled = true
+region_rect = Rect2(218, 162, 16, 16)
+
+[node name="Ship2" type="Sprite2D" parent="Asset"]
+rotation = -1.5708
+texture = ExtResource("1_4a83h")
+region_enabled = true
+region_rect = Rect2(198, 222, 16, 16)

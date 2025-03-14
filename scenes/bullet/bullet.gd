@@ -17,7 +17,8 @@ func set_bullet_color(color: Global.Colors) -> void:
 		bullet_colors[key].hide()
 	
 	# Show only the color we care about
-	bullet_colors[bullet_color].show()
+	if bullet_color in bullet_colors:
+		bullet_colors[bullet_color].show()
 
 # Remove the collision from everything on this object to reset it to a blank state
 # for setting collisions later
@@ -89,11 +90,6 @@ func _ready() -> void:
 	bullet_colors[Global.Colors.RED] = $Color/Red
 	bullet_colors[Global.Colors.PINK] = $Color/Pink
 	bullet_colors[Global.Colors.GREEN] = $Color/Green
-	
-	# If the bullet goes outside of the viewport, automatically free it. We don't
-	# want bullets to just float out there forever
-	if position.y < -5 or position.y > get_viewport().size.y + 5:
-		queue_free()
 
 # Triggered on a bullet being destroyed, cause an explosion
 func destroy_bullet():
@@ -114,6 +110,12 @@ func destroy_bullet():
 	# And play the explosion effect
 	$Explosion.show()
 	$Explosion.play()
+
+func _process(delta: float) -> void:
+	# If the bullet goes outside of the viewport, automatically free it. We don't
+	# want bullets to just float out there forever
+	if position.y < -5 or position.y > get_viewport().size.y + 5:
+		queue_free()
 
 func _physics_process(delta: float) -> void:
 	# Check to see if the ray cast has detected anything
