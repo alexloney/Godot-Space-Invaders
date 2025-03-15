@@ -4,8 +4,6 @@ extends Area2D
 
 var ship_width: int = 28
 var ship_height: int = 28
-var bound_min_x: int = 0
-var bound_max_x: int = 0
 var ship_color: Global.Colors = Global.Colors.GREEN
 
 func get_width() -> int:

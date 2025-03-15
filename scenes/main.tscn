@@ -1,15 +1,20 @@
-[gd_scene load_steps=14 format=3 uid="uid://1g6fkgk4a7s3"]
+[gd_scene load_steps=19 format=3 uid="uid://1g6fkgk4a7s3"]
 
 [ext_resource type="Script" uid="uid://b4fgu7iprt1p2" path="res://scenes/main.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bwq1qa2of8uhd" path="res://scenes/player/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://b6oie3fqrmrph" path="res://scenes/bullet/bullet.tscn" id="2_jyhfs"]
-[ext_resource type="Script" uid="uid://cgygupn5ha2td" path="res://scenes/node_2d.gd" id="3_sugp2"]
+[ext_resource type="Texture2D" uid="uid://6mmegl1h6fts" path="res://assets/1.png" id="3_choun"]
+[ext_resource type="Texture2D" uid="uid://dgmv735rm4xnp" path="res://assets/3.png" id="4_a8y0u"]
+[ext_resource type="Texture2D" uid="uid://6f17juinjhey" path="res://assets/2.png" id="4_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://cs0b0msvxlyco" path="res://scenes/player-lives/player_lives.tscn" id="5_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://4rgih240iwkr" path="res://assets/4.png" id="6_jkv2x"]
 [ext_resource type="Script" uid="uid://bthqlnm1rnjm" path="res://scenes/game_over_screen.gd" id="6_tefeu"]
 [ext_resource type="Script" uid="uid://x6fag8j2hrd4" path="res://scenes/win_screen.gd" id="7_85g3d"]
+[ext_resource type="Texture2D" uid="uid://bgxo14r26afm4" path="res://assets/5.png" id="7_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://bqy1pa3kaydux" path="res://scenes/enemy-manager/enemy_manager.tscn" id="7_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://bkqweflypj03f" path="res://scenes/enemy/enemy.tscn" id="8_tipki"]
+[ext_resource type="Texture2D" uid="uid://bc2wkrh1t4p16" path="res://assets/6.png" id="8_muem4"]
 [ext_resource type="PackedScene" uid="uid://bfeptm6nk5ymb" path="res://scenes/bunker/bunker.tscn" id="10_choun"]
+[ext_resource type="PackedScene" uid="uid://djb08rd2qyn5" path="res://scenes/mothership-manager/mothership_manager.tscn" id="14_jkv2x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
 size = Vector2(10, 811)
@@ -24,11 +29,58 @@ size = Vector2(450, 151)
 script = ExtResource("1_0wfyh")
 bullet = ExtResource("2_jyhfs")
 
+[node name="Background" type="Node" parent="."]
+
+[node name="1" type="Sprite2D" parent="Background"]
+position = Vector2(225.5, 329.5)
+scale = Vector2(0.786458, 2.03395)
+texture = ExtResource("3_choun")
+
+[node name="4" type="Sprite2D" parent="Background"]
+position = Vector2(232, 161)
+texture = ExtResource("4_a8y0u")
+
+[node name="2" type="Sprite2D" parent="Background"]
+position = Vector2(130, 162)
+texture = ExtResource("4_ya4ey")
+
+[node name="3" type="Sprite2D" parent="Background"]
+position = Vector2(707, 162)
+texture = ExtResource("4_ya4ey")
+
+[node name="5" type="Sprite2D" parent="Background"]
+position = Vector2(249, 357)
+texture = ExtResource("6_jkv2x")
+
+[node name="6" type="Sprite2D" parent="Background"]
+position = Vector2(256, 295)
+texture = ExtResource("7_jbj1t")
+
+[node name="7" type="Sprite2D" parent="Background"]
+position = Vector2(270, 496)
+texture = ExtResource("8_muem4")
+
+[node name="Control" type="Control" parent="Background"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -155.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="Background/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.33368, 0.202182, 0.103444, 1)
+
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
 position = Vector2(220, 756)
-
-[node name="Node2D" type="Node2D" parent="."]
-script = ExtResource("3_sugp2")
 
 [node name="PlayerLives" parent="." instance=ExtResource("5_tbgi4")]
 
@@ -47,12 +99,14 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -235.0
+offset_left = -130.0
 offset_top = 12.0
+offset_right = -13.0
 offset_bottom = 62.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 36
-text = "Score: 0"
+text = "0"
+horizontal_alignment = 2
 
 [node name="GameOverScreen" type="Control" parent="."]
 process_mode = 3
@@ -183,76 +237,10 @@ theme_override_font_sizes/font_size = 50
 text = "Play Again"
 
 [node name="EnemyManager" parent="." instance=ExtResource("7_o6xl0")]
-position = Vector2(0, 91)
+position = Vector2(0, 142)
 
-[node name="Node2D2" type="Node2D" parent="."]
-visible = false
-
-[node name="Enemy" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(14, 140)
-
-[node name="Enemy2" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(47, 140)
-
-[node name="Enemy3" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(80, 140)
-
-[node name="Enemy4" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(113, 140)
-
-[node name="Enemy5" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(146, 140)
-
-[node name="Enemy6" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(179, 140)
-
-[node name="Enemy7" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(212, 140)
-
-[node name="Enemy8" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(245, 140)
-
-[node name="Enemy9" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(278, 140)
-
-[node name="Enemy10" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(311, 140)
-
-[node name="Enemy11" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(344, 140)
-
-[node name="Enemy12" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(106, 168)
-
-[node name="Enemy13" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(139, 168)
-
-[node name="Enemy14" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(172, 168)
-
-[node name="Enemy15" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(205, 168)
-
-[node name="Enemy16" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(238, 168)
-
-[node name="Enemy17" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(271, 168)
-
-[node name="Enemy18" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(304, 168)
-
-[node name="Enemy19" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(337, 168)
-
-[node name="Enemy20" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(370, 168)
-
-[node name="Enemy21" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(403, 168)
-
-[node name="Enemy22" parent="Node2D2" instance=ExtResource("8_tipki")]
-position = Vector2(436, 168)
+[node name="MothershipManager" parent="." instance=ExtResource("14_jkv2x")]
+position = Vector2(0, 83)
 
 [node name="Walls" type="Area2D" parent="." groups=["walls"]]
 
@@ -270,15 +258,17 @@ shape = SubResource("RectangleShape2D_85g3d")
 position = Vector2(225, 725.5)
 shape = SubResource("RectangleShape2D_choun")
 
-[node name="Bunker" parent="." instance=ExtResource("10_choun")]
+[node name="Bunkers" type="Node2D" parent="."]
+
+[node name="Bunker" parent="Bunkers" instance=ExtResource("10_choun")]
 position = Vector2(39, 716)
 scale = Vector2(2.86589, 2.86589)
 
-[node name="Bunker2" parent="." instance=ExtResource("10_choun")]
+[node name="Bunker2" parent="Bunkers" instance=ExtResource("10_choun")]
 position = Vector2(193, 716)
 scale = Vector2(2.86589, 2.86589)
 
-[node name="Bunker3" parent="." instance=ExtResource("10_choun")]
+[node name="Bunker3" parent="Bunkers" instance=ExtResource("10_choun")]
 position = Vector2(348, 716)
 scale = Vector2(2.86589, 2.86589)
 

@@ -1,5 +1,6 @@
 extends Node2D
 
+# When a player life is used up, hide the corresponding life with an animation
 func hide_life(color: Global.Colors) -> void:
 	match color:
 		Global.Colors.BLUE:

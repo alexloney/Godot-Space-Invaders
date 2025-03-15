@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://djb08rd2qyn5"]
+
+[ext_resource type="Script" uid="uid://bhr8rlg8otrqt" path="res://scenes/mothership-manager/mothership_manager.gd" id="1_ug7yv"]
+[ext_resource type="PackedScene" uid="uid://bkqweflypj03f" path="res://scenes/enemy/enemy.tscn" id="2_na36v"]
+
+[node name="MothershipManager" type="Node2D"]
+script = ExtResource("1_ug7yv")
+enemy = ExtResource("2_na36v")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="FireTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]

@@ -4,8 +4,6 @@ extends Area2D
 
 var ship_width: int = 42
 var ship_height: int = 12
-var bound_min_x: int = 0
-var bound_max_x: int = 0
 var ship_color: Global.Colors = Global.Colors.RED
 
 func get_width() -> int:
@@ -18,4 +16,8 @@ func destroy_ship() -> void:
 	get_parent().destroy_ship()
 
 func fire_bullet() -> void:
-	print("pew!")
+	var new_bullet : Node2D = bullet.instantiate()
+	get_tree().root.get_node("Main").add_child(new_bullet)
+	new_bullet.position = global_position
+	new_bullet.set_bullet_type(Global.BulletType.ENEMY)
+	new_bullet.set_bullet_color(ship_color)

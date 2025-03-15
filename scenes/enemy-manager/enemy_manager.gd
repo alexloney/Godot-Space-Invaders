@@ -1,32 +1,44 @@
 extends Node2D
 
+# Signal sent when an enemy ship has reached the ground
 signal enemy_landed()
 
 @export var enemy: PackedScene
-var x_space: int = 5
+
+# Space between ships on the x-axis
+var x_space: int = 5 
+
+# Space between ships on the y-axis
 var y_space: int = 5
-var rows: int = 2
+
+# Number of rows of ship type 1, 2, and 3
 var ship_1_rows: int = 2
 var ship_2_rows: int = 2
 var ship_3_rows: int = 4
+
+# Number of columns of ships
 var columns: int = 10
-var ships_min_x: int = 0
-var ships_max_x: int = 0
+
+# Speed at which the ships should bounce back and forth
 var speed: float = 30
+
+# Increment of speed increase when a ship is destroyed
 var speed_increment: float = 0.5
+
+# Current movement direction for ships
 var movement_direction: Global.Direction = Global.Direction.RIGHT
+
+# Calculated next y-position when ships moving downward
 var next_y: int = 0
+
+# Increment of y for the next y when moving downward
 var vertical_movement_distance: int = 24 + 15
 
-var ship_width: int = 28
-var mothership_width: int = 42
-
-var mothership: Node2D
+# Reference to all ships contained within for iterating over
 var ships: Array[Array]
 
-# Can I give a ship a start and range and tell it to progress?
-# No - this starts to get out of sync
-
+# Given a ship type, create a new instance of that ship and assign the group,
+# collision layer, and starting position
 func create_ship(type: Global.EnemyShips, start_y: int, offset: int) -> Node2D:
 	var new_enemy: Node2D = enemy.instantiate()
 	add_child(new_enemy)
@@ -38,6 +50,9 @@ func create_ship(type: Global.EnemyShips, start_y: int, offset: int) -> Node2D:
 	new_enemy.set_collision_layer_value(Global.CollisionLayer.ENEMY, true)
 	return new_enemy
 
+# Spawn the full array of ships, looping over the rows/columns from the variables
+# above to generate the ships, store the generated ships in the ships array for
+# later reference.
 func spawn_ships() -> void:
 	# Keep track of the y-position for each row
 	var start_y = 0
@@ -75,8 +90,9 @@ func spawn_ships() -> void:
 			row.append(new_enemy)
 		start_y += ship_height + y_space
 		ships.append(row)
-	
-	# TODO: Implement Mothership
+
+func _ready() -> void:
+	spawn_ships()
 
 func _physics_process(delta: float) -> void:
 	# Check for collision by checking the ray cast on each invader. This seems
@@ -120,16 +136,15 @@ func _physics_process(delta: float) -> void:
 			if position.y >= next_y:
 				movement_direction = Global.Direction.LEFT
 
+# When a ship is destroyed, this function is called to increase the difficulty
+# ever so slightly.
 func increase_speed() -> void:
 	speed += speed_increment
 
+# Check to see if all ships have been destroyed
 func all_ships_destroyed() -> bool:
 	for i in range(len(ships)):
 		for j in range(len(ships[i])):
 			if ships[i][j] and ships[i][j].ship_alive:
 				return false
 	return true
-
-func _on_enemy_enemy_ship_destroyed() -> void:
-	# This is never called
-	print("enemy_ship_destroyed")

@@ -91,13 +91,20 @@ func destroy_ship() -> void:
 	# This signal never seems to be emited?
 	emit_signal("enemy_ship_destroyed")
 	
-	# TODO: Animate free here
+	# TODO: This could be enhanced with an animation at this point
 	queue_free()
 
 
 func _on_shot_timer_timeout() -> void:
-	var chance: int = randi() % 100
-	
-	# 5% chance to fire a bullet
-	if chance < 5: 
-		ship_ref.fire_bullet()
+	if ship_ref:
+		var chance: int = randi() % 100
+
+		# Because there are fewer Motherships on the screen at any given time, if it's
+		# a Mothership, give it a 25% chance of firing a shot. For a regular ship, it
+		# has a 5% chance of firing a shot.
+		if ship_type == Global.EnemyShips.MOTHERSHIP:
+			if chance < 25:
+				ship_ref.fire_bullet()
+		else:
+			if chance < 5:
+				ship_ref.fire_bullet()

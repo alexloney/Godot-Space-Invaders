@@ -142,6 +142,9 @@ func _physics_process(delta: float) -> void:
 				collider.destroy_ship()
 				destroy_bullet()
 			
+			# If this is a bunker, then destroy the bunker piece that was hit. Bunkers are
+			# composed of many small pieces, so this will just take out a small portion of
+			# the bunker.
 			elif collider.is_in_group("bunker"): 
 				collider.destroy_bunker()
 				destroy_bullet()
